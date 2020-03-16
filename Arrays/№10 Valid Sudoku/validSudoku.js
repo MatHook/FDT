@@ -4,7 +4,7 @@ const isValidSudoku = (board) => {
       if (isValid(board, i, j)) return true;
     }
   }
-  
+
   return false;
 };
 
