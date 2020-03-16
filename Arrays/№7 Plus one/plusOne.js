@@ -4,7 +4,6 @@ const plusOne = digits => {
   digits.pop();
   digits.push(le);
   digits = parseInt(digits.toString().split(',').join(''));
-  console.log(digits);
   while (digits > 0) {
     output.push(digits % 10);
     digits = parseInt(digits / 10);
