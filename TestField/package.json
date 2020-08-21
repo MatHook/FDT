@@ -1,0 +1,8 @@
+{
+  "name": "testfield",
+  "version": "1.0.0",
+  "description": "just for test",
+  "main": "stats.js",
+  "author": "MatHook",
+  "license": "ISC"
+}
