@@ -14,5 +14,5 @@ function bestStats(passes, times, desiredPercentage) {
   return tries
 }
 
-console.log(bestStats(136, 160, .99));
+console.log(bestStats(136, 160, .90));
 
