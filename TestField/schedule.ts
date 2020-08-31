@@ -20,8 +20,6 @@ data.Lessons.forEach((item) => {
   delete item.disciplinetypeload;
   delete item.disciplineOid;
   delete item.disciplinetypeload;
-  delete item.duration;
-  delete item.endLesson;
   delete item.group;
   delete item.groupOid;
   delete item.group_facultyoid;
@@ -49,34 +47,69 @@ data.Lessons.forEach((item) => {
   delete item.url1_description;
   delete item.url2;
   delete item.url2_description;
+  delete item.lecturer;
 });
 
 var parsedLessons = { ...data.Lessons };
 
-//console.log(parsedLessons)
-
 var groupedByType = _.groupBy(parsedLessons, "kindOfWork");
+var lectureLessons = groupedByType["Лекция"];
+var seminarLessons = groupedByType["Семинар"];
 
-var groupedByAuditorium = _.groupBy(groupedByType["Лекция"], "auditorium");
+var groupedLectionsByAuditorium = _.groupBy(lectureLessons, "auditorium");
+var parsedLectureLessons = groupedLectionsByAuditorium["Online"];
 
-console.log(Object.keys(groupedByAuditorium["4315"]).length + " 4315");
-console.log(Object.keys(groupedByAuditorium["Online"]).length + " Online");
-console.log(Object.keys(groupedByAuditorium["online"]).length + " online");
-console.log(Object.keys(groupedByAuditorium["R503"]).length + " R503");
-console.log(Object.keys(groupedByAuditorium["501 "]).length + " 501");
+var groupedSeminarsByAuditorium = _.groupBy(seminarLessons, "auditorium");
+var parsedSeminarLessons: {}[] = [];
 
-console.log(
-  Object.keys(groupedByAuditorium["online"]).length +
-    Object.keys(groupedByAuditorium["Online"]).length +
-    " online " +
-    (Object.keys(groupedByAuditorium["4315"]).length +
-      Object.keys(groupedByAuditorium["R503"]).length +
-      Object.keys(groupedByAuditorium["501 "]).length) +
-    " irl"
+Object.getOwnPropertyNames(groupedSeminarsByAuditorium).forEach(
+  (item, index, array) => {
+    if (
+      item === "3201" ||
+      item === "4405" ||
+      item === "4414" ||
+      item === "5407" ||
+      item === "3210" ||
+      item === "5409" ||
+      item === "2208"
+    )
+      parsedSeminarLessons.push(groupedSeminarsByAuditorium[item]);
+  }
 );
 
-// console.log(groupedByAuditorium)
-// console.log(counter)
+console.log(parsedSeminarLessons);
 
-let info = JSON.stringify(groupedByAuditorium);
+var calendarArray: {
+  title: String;
+  description: String;
+  location: String;
+  start: Array<Number>;
+  end: Array<Number>;
+}[] = [];
+
+for (let i = 0; i < parsedLectureLessons.length; i++) {
+  let title = parsedLectureLessons[i].discipline;
+  let location = parsedLectureLessons[i].auditorium;
+  let begin =
+    parsedLectureLessons[i].date + "." + parsedLectureLessons[i].beginLesson;
+  let end =
+    parsedLectureLessons[i].date + "." + parsedLectureLessons[i].endLesson;
+  let description =
+    parsedLectureLessons[i].kindOfWork + " " + parsedLectureLessons[i].building;
+
+  calendarArray.push({
+    title: title,
+    location: location,
+    description: description,
+    start: begin.split(/[.:]+/).map(Number),
+    end: end.split(/[.:]+/).map(Number),
+  });
+}
+
+let info = JSON.stringify(groupedSeminarsByAuditorium);
 fs.writeFileSync("LessonsParsed.json", info);
+
+let calendarInfo = JSON.stringify(calendarArray);
+fs.writeFileSync("calendarJSON.json", calendarInfo);
+
+//console.log(calendarArray);

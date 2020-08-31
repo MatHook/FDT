@@ -8,6 +8,8 @@
   "dependencies": {
     "@types/lodash": "^4.14.161",
     "fs": "0.0.1-security",
+    "googleapis": "^59.0.0",
+    "ics": "^2.24.0",
     "lodash": "^4.17.20",
     "moment": "^2.27.0"
   },
