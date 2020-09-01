@@ -60,7 +60,15 @@ var groupedLectionsByAuditorium = _.groupBy(lectureLessons, "auditorium");
 var parsedLectureLessons = groupedLectionsByAuditorium["Online"];
 
 var groupedSeminarsByAuditorium = _.groupBy(seminarLessons, "auditorium");
-var parsedSeminarLessons: {}[] = [];
+var parsedSeminarLessons: {
+  discipline: String;
+  auditorium: String;
+  date: String;
+  beginLesson: String;
+  endLesson: String;
+  kindOfWork: String;
+  building: String;
+}[] = [];
 
 Object.getOwnPropertyNames(groupedSeminarsByAuditorium).forEach(
   (item, index, array) => {
@@ -71,15 +79,26 @@ Object.getOwnPropertyNames(groupedSeminarsByAuditorium).forEach(
       item === "5407" ||
       item === "3210" ||
       item === "5409" ||
-      item === "2208"
+      item === "2208" ||
+      item === "5410" ||
+      item === "3202" ||
+      item === "3313"
     )
-      parsedSeminarLessons.push(groupedSeminarsByAuditorium[item]);
+      groupedSeminarsByAuditorium[item].forEach((les) => {
+        parsedSeminarLessons.push(les);
+      });
   }
 );
 
-console.log(parsedSeminarLessons);
+var lectureCalendarArray: {
+  title: String;
+  description: String;
+  location: String;
+  start: Array<Number>;
+  end: Array<Number>;
+}[] = [];
 
-var calendarArray: {
+var seminarCalendarArray: {
   title: String;
   description: String;
   location: String;
@@ -97,7 +116,7 @@ for (let i = 0; i < parsedLectureLessons.length; i++) {
   let description =
     parsedLectureLessons[i].kindOfWork + " " + parsedLectureLessons[i].building;
 
-  calendarArray.push({
+  lectureCalendarArray.push({
     title: title,
     location: location,
     description: description,
@@ -106,10 +125,32 @@ for (let i = 0; i < parsedLectureLessons.length; i++) {
   });
 }
 
-let info = JSON.stringify(groupedSeminarsByAuditorium);
+for (let i = 0; i < parsedSeminarLessons.length; i++) {
+  let title = parsedSeminarLessons[i].discipline;
+  let location = parsedSeminarLessons[i].auditorium;
+  let begin =
+    parsedSeminarLessons[i].date + "." + parsedSeminarLessons[i].beginLesson;
+  let end =
+    parsedSeminarLessons[i].date + "." + parsedSeminarLessons[i].endLesson;
+  let description =
+    parsedSeminarLessons[i].kindOfWork + " " + parsedSeminarLessons[i].building;
+
+  seminarCalendarArray.push({
+    title: title,
+    location: location,
+    description: description,
+    start: begin.split(/[.:]+/).map(Number),
+    end: end.split(/[.:]+/).map(Number),
+  });
+}
+
+let info = JSON.stringify(parsedSeminarLessons);
 fs.writeFileSync("LessonsParsed.json", info);
 
-let calendarInfo = JSON.stringify(calendarArray);
-fs.writeFileSync("calendarJSON.json", calendarInfo);
+let calendarLecture = JSON.stringify(lectureCalendarArray);
+fs.writeFileSync("calendarLectureJSON.json", calendarLecture);
+
+let calendarSeminar = JSON.stringify(seminarCalendarArray);
+fs.writeFileSync("calendarSeminarJSON.json", calendarSeminar);
 
 //console.log(calendarArray);
