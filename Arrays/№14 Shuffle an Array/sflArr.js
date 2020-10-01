@@ -46,4 +46,4 @@ var slt = new Solution(numbers)
 
 console.log(slt.shuffle())
 console.log(slt.reset())
-console.log(slt.shuffle())
+console.logt,f(slt.shuffle())
