@@ -56,39 +56,39 @@ var groupedByType = _.groupBy(parsedLessons, "kindOfWork");
 var lectureLessons = groupedByType["Лекция"];
 var seminarLessons = groupedByType["Семинар"];
 
-var groupedLectionsByAuditorium = _.groupBy(lectureLessons, "auditorium");
-var parsedLectureLessons = groupedLectionsByAuditorium["Online"];
+// var groupedLectionsByAuditorium = _.groupBy(lectureLessons, "auditorium");
+// var parsedLectureLessons = groupedLectionsByAuditorium["Online"];
 
-var groupedSeminarsByAuditorium = _.groupBy(seminarLessons, "auditorium");
-var parsedSeminarLessons: {
-  discipline: String;
-  auditorium: String;
-  date: String;
-  beginLesson: String;
-  endLesson: String;
-  kindOfWork: String;
-  building: String;
-}[] = [];
+// var groupedSeminarsByAuditorium = _.groupBy(seminarLessons, "auditorium");
+// var parsedSeminarLessons: {
+//   discipline: String;
+//   auditorium: String;
+//   date: String;
+//   beginLesson: String;
+//   endLesson: String;
+//   kindOfWork: String;
+//   building: String;
+// }[] = [];
 
-Object.getOwnPropertyNames(groupedSeminarsByAuditorium).forEach(
-  (item, index, array) => {
-    if (
-      item === "3201" ||
-      item === "4405" ||
-      item === "4414" ||
-      item === "5407" ||
-      item === "3210" ||
-      item === "5409" ||
-      item === "2208" ||
-      item === "5410" ||
-      item === "3202" ||
-      item === "3313"
-    )
-      groupedSeminarsByAuditorium[item].forEach((les) => {
-        parsedSeminarLessons.push(les);
-      });
-  }
-);
+// Object.getOwnPropertyNames(groupedSeminarsByAuditorium).forEach(
+//   (item, index, array) => {
+//     if (
+//       item === "3201" ||
+//       item === "4405" ||
+//       item === "4414" ||
+//       item === "5407" ||
+//       item === "3210" ||
+//       item === "5409" ||
+//       item === "2208" ||
+//       item === "5410" ||
+//       item === "3202" ||
+//       item === "3313"
+//     )
+//       groupedSeminarsByAuditorium[item].forEach((les) => {
+//         parsedSeminarLessons.push(les);
+//       });
+//   }
+// );
 
 var lectureCalendarArray: {
   title: String;
@@ -106,15 +106,13 @@ var seminarCalendarArray: {
   end: Array<Number>;
 }[] = [];
 
-for (let i = 0; i < parsedLectureLessons.length; i++) {
-  let title = parsedLectureLessons[i].discipline;
-  let location = parsedLectureLessons[i].auditorium;
-  let begin =
-    parsedLectureLessons[i].date + "." + parsedLectureLessons[i].beginLesson;
-  let end =
-    parsedLectureLessons[i].date + "." + parsedLectureLessons[i].endLesson;
+for (let i = 0; i < lectureLessons.length; i++) {
+  let title = lectureLessons[i].discipline;
+  let location = lectureLessons[i].auditorium;
+  let begin = lectureLessons[i].date + "." + lectureLessons[i].beginLesson;
+  let end = lectureLessons[i].date + "." + lectureLessons[i].endLesson;
   let description =
-    parsedLectureLessons[i].kindOfWork + " " + parsedLectureLessons[i].building;
+    lectureLessons[i].kindOfWork + " " + lectureLessons[i].building;
 
   lectureCalendarArray.push({
     title: title,
@@ -125,15 +123,13 @@ for (let i = 0; i < parsedLectureLessons.length; i++) {
   });
 }
 
-for (let i = 0; i < parsedSeminarLessons.length; i++) {
-  let title = parsedSeminarLessons[i].discipline;
-  let location = parsedSeminarLessons[i].auditorium;
-  let begin =
-    parsedSeminarLessons[i].date + "." + parsedSeminarLessons[i].beginLesson;
-  let end =
-    parsedSeminarLessons[i].date + "." + parsedSeminarLessons[i].endLesson;
+for (let i = 0; i < seminarLessons.length; i++) {
+  let title = seminarLessons[i].discipline;
+  let location = seminarLessons[i].auditorium;
+  let begin = seminarLessons[i].date + "." + seminarLessons[i].beginLesson;
+  let end = seminarLessons[i].date + "." + seminarLessons[i].endLesson;
   let description =
-    parsedSeminarLessons[i].kindOfWork + " " + parsedSeminarLessons[i].building;
+    seminarLessons[i].kindOfWork + " " + seminarLessons[i].building;
 
   seminarCalendarArray.push({
     title: title,
@@ -144,7 +140,7 @@ for (let i = 0; i < parsedSeminarLessons.length; i++) {
   });
 }
 
-let info = JSON.stringify(parsedSeminarLessons);
+let info = JSON.stringify(parsedLessons);
 fs.writeFileSync("LessonsParsed.json", info);
 
 let calendarLecture = JSON.stringify(lectureCalendarArray);
