@@ -4,13 +4,13 @@
  */
 var hammingWeight = (n) => {
   let cnt = 0;
-  while(n) {
+  while (n) {
     if (n & 1) {
-      cnt++
+      cnt++;
     }
-    n = n >>> 1
+    n = n >>> 1;
   }
-  return cnt
+  return cnt;
 };
 
-console.log(hammingWeight(00000000000000000000000000001011))
+console.log(hammingWeight(00000000000000000000000000001011));

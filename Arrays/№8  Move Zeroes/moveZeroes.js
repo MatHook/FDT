@@ -10,5 +10,4 @@ const moveZeroes = (array) => {
   return array;
 };
 
-const nums = [0,1,0,3,12];
-console.log(moveZeroes(nums));
+console.log(moveZeroes([0, 1, 0, 3, 12]));

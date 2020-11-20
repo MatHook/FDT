@@ -4,5 +4,4 @@ const singulatiryCheck = (array) => {
   return a;
 };
 
-const nums = [2,2,1];
-console.log(singulatiryCheck(nums));
+console.log(singulatiryCheck([2, 2, 1]));

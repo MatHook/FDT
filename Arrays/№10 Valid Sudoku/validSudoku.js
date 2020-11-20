@@ -9,8 +9,11 @@ const isValidSudoku = (board) => {
 };
 
 const isValid = (arr, row, col) => {
-  return (notInRow(arr, row) && notInCol(arr, col) &&
-  notInBox(arr, row - row % 3, col - col % 3))
+  return (
+    notInRow(arr, row) &&
+    notInCol(arr, col) &&
+    notInBox(arr, row - (row % 3), col - (col % 3))
+  );
 };
 
 const notInRow = (arr, row) => {
@@ -19,7 +22,7 @@ const notInRow = (arr, row) => {
   for (let i = 0; i < 9; i++) {
     if (st.has(arr[row][i])) return false;
 
-    if (arr[row][i] !== ".") st.add(arr[row][i])
+    if (arr[row][i] !== ".") st.add(arr[row][i]);
   }
 
   return true;
@@ -31,14 +34,14 @@ const notInCol = (arr, col) => {
   for (let i = 0; i < 9; i++) {
     if (st.has(arr[i][col])) return false;
 
-    if (arr[i][col] !== ".") st.add(arr[i][col])
+    if (arr[i][col] !== ".") st.add(arr[i][col]);
   }
 
   return true;
 };
 
 const notInBox = (arr, startRow, startCol) => {
-  var st = new Set;
+  var st = new Set();
 
   for (let row = 0; row < 9; row++) {
     for (let col = 0; col < 9; col++) {
@@ -53,14 +56,16 @@ const notInBox = (arr, startRow, startCol) => {
   return true;
 };
 
-console.log(isValidSudoku([
-  [ '5', '3', '.', '.', '7', '.', '.', '.', '.' ],
-  [ '6', '.', '.', '1', '9', '5', '.', '.', '.' ],
-  [ '.', '9', '8', '.', '.', '.', '.', '6', '.' ],
-  [ '8', '.', '.', '.', '6', '.', '.', '.', '3' ],
-  [ '4', '.', '.', '8', '.', '3', '.', '.', '1' ],
-  [ '7', '.', '.', '.', '2', '.', '.', '.', '6' ],
-  [ '.', '6', '.', '.', '.', '.', '2', '8', '.' ],
-  [ '.', '.', '.', '4', '1', '9', '.', '.', '5' ],
-  [ '.', '.', '.', '.', '8', '.', '.', '7', '9' ]
-]));
+console.log(
+  isValidSudoku([
+    ["5", "3", ".", ".", "7", ".", ".", ".", "."],
+    ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+    [".", "9", "8", ".", ".", ".", ".", "6", "."],
+    ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+    ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+    ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+    [".", "6", ".", ".", ".", ".", "2", "8", "."],
+    [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+    [".", ".", ".", ".", "8", ".", ".", "7", "9"],
+  ])
+);
