@@ -1,3 +1,10 @@
+/*
+  explanation: Determine if a 9 x 9 Sudoku board is valid. 
+  Only the filled cells need to be validated according to the rules
+  task: 9 x 9 board
+  result: true || false
+*/
+
 const isValidSudoku = (board) => {
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
