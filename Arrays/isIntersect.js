@@ -1,3 +1,9 @@
+/*
+  explanation: Given two arrays, write a function to compute their intersection.
+  task: [1, 2, 2, 1], [2, 2]
+  result: [2, 2]
+*/
+
 /**
  * @param {number[]} nums1
  * @param {number[]} nums2

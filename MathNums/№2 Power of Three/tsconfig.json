@@ -1,5 +1,0 @@
-{
-  "compilerOptions": {
-    "lib": ["ES5", "DOM", "ES2015.Core"]
-  }
-}

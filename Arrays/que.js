@@ -1,3 +1,8 @@
+/*
+  explanation: Design a stack that supports push, 
+  pop, top, and retrieving the minimum element in constant time.
+*/
+
 let A, B;
 
 var MinStack = function () {

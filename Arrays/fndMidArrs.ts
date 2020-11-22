@@ -1,3 +1,11 @@
+/*
+  explanation: Given two sorted arrays nums1 and nums2
+  of size m and n respectively, 
+  return the median of the two sorted arrays
+  task: [3], [-2, -1]
+  result: [ -2, -1, 3 ]
+*/
+
 function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
   var output: number;
 

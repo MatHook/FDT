@@ -1,3 +1,8 @@
+/*
+  explanation: Given an integer array nums, 
+  design an algorithm to randomly shuffle the array.
+*/
+
 /**
  * @param {number[]} nums
  */

@@ -1,3 +1,11 @@
+
+/*
+  explanation: Given two sorted integer arrays nums1 
+  and nums2, merge nums2 into nums1 as one sorted array.
+  task: [1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3
+  result: [ 1, 2, 2, 3, 5, 6 ]
+*/
+
 /**
  * @param {number[]} nums1
  * @param {number} m
@@ -13,6 +21,8 @@ var merge = (nums1, m, nums2, n) => {
   while (p2 >= 0) {
     nums1[end--] = nums2[p2--];
   }
+
+  return nums1
 };
 
 console.log(merge([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3));

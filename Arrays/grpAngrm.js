@@ -1,3 +1,11 @@
+/*
+  explanation: Given an array of strings strs, 
+  group the anagrams together. 
+  You can return the answer in any order.
+  task: ["eat", "tea", "tan", "ate", "nat", "bat"]
+  result: [ [ 'eat', 'tea', 'ate' ], [ 'tan', 'nat' ], [ 'bat' ] ]
+*/
+
 function groupAnagrams(strs) {
   let obj = {};
 

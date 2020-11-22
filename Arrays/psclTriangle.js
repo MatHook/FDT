@@ -1,3 +1,10 @@
+/*
+  explanation: Given a non-negative integer numRows, 
+  generate the first numRows of Pascal's triangle.
+  task: 3
+  result: [ [ 1 ], [ 1, 1 ], [ 1, 2, 1 ] ]
+*/
+
 /**
  * @param {number} numRows
  * @return {number[][]}
@@ -18,4 +25,4 @@ var generate = function (numRows) {
   return triangle
 };
 
-console.log(generate(5))
+console.log(generate(3))
