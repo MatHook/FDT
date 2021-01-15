@@ -11,4 +11,4 @@ var strStr = (haystack, needle) => {
     return -1
 };
 
-console.log(strStr("aaaaa", "bba"))
+console.log(strStr("aabaa", "b"))

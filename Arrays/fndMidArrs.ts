@@ -23,8 +23,8 @@ function findMedianSortedArrays(nums1: number[], nums2: number[]): number {
     output = numsRes[Math.floor(numsRes.length / 2)];
   }
 
-  console.log(numsRes);
+  console.log(output)
   return output;
 }
 
-findMedianSortedArrays([3], [-2, -1]);
+findMedianSortedArrays([1], [3, 4]);
